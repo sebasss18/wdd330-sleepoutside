@@ -2,13 +2,21 @@ import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
+  // This safely handles if the cart is an array, a single object, or completely empty
   const items = Array.isArray(cartItems)
     ? cartItems
     : cartItems
       ? [cartItems]
       : [];
-  const htmlItems = items.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  
+  // Check if there are actually items to display
+  if (items.length > 0) {
+    const htmlItems = items.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  } else {
+    // If empty, show a nice message instead of a blank space
+    document.querySelector(".product-list").innerHTML = "<p>Your cart is currently empty. Go find some gear!</p>";
+  }
 }
 
 function cartItemTemplate(item) {
