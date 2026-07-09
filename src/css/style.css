@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -130,6 +130,32 @@ button {
 .cart:hover svg {
   fill: gray;
 }
+
+/*animation when item added to cart */
+@keyframes cart-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.35) rotate(-10deg);
+  }
+
+  60% {
+    transform: scale(1.12) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.cart--animate svg {
+  transform-origin: center center;
+  animation: cart-pop 600ms cubic-bezier(.2, .9, .3, 1);
+}
+
+/* End animation when item added to cart */
 
 /* End cart icon styles */
 
