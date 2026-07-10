@@ -130,6 +130,9 @@ button {
 .cart:hover svg {
   fill: gray;
 }
+.hide {
+  display: none;
+}
 
 /*animation when item added to cart */
 @keyframes cart-pop {
