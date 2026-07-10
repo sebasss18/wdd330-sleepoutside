@@ -8,7 +8,7 @@ function renderCartContents() {
     : cartItems
       ? [cartItems]
       : [];
-  
+
   // Check if there are actually items to display
   if (items.length > 0) {
     const htmlItems = items.map((item) => cartItemTemplate(item));
@@ -26,6 +26,7 @@ function renderCartContents() {
   } else {
     // If empty, show a nice message instead of a blank space
     document.querySelector(".product-list").innerHTML = "<p>Your cart is currently empty. Go find some gear!</p>";
+    cartFooter.classList.add("hide");
   }
 }
 
