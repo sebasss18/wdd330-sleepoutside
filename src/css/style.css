@@ -303,6 +303,36 @@ footer {
   z-index: 1000;
 }
 
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  width: 500px;
+  max-width: 90%;
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+}
+
+#close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#close-modal:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
 .cart {
   position: relative;
 }
@@ -322,4 +352,18 @@ footer {
   align-items: center;
   justify-content: center;
   z-index: 10;
+}
+
+.flash-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
