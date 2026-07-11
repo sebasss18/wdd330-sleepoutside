@@ -303,32 +303,23 @@ footer {
   z-index: 1000;
 }
 
-.modal.hidden {
-  display: none;
-}
-
-.modal-content {
-  background: white;
-  width: 500px;
-  max-width: 90%;
-  padding: 2rem;
-  border-radius: 15px;
+.cart {
   position: relative;
 }
 
-#close-modal {
+.cart-badge {
+  display: none;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: pointer;
-  border-radius: 10px;
-  font-size: 1.5rem;
-  border: none;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#close-modal:hover {
-  transform: scale(1.1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  top: -6px;
+  right: -6px;
+  background-color: #e67e22;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
 }

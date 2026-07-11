@@ -25,30 +25,20 @@ export default class ProductDetails {
 
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+
+    
     // This is the flag that will trigger the animation on the cart icon when the page reloads
-
-    setLocalStorage("so-cart-animate", true);
-
-    try {
-      const cartEl = document.querySelector(".cart");
-      const svg = cartEl?.querySelector("svg");
-      if (cartEl && svg) {
-        cartEl.classList.add("cart--animate");
-        const handleAnimationEnd = () => {
-          cartEl.classList.remove("cart--animate");
-          svg.removeEventListener("animationend", handleAnimationEnd);
-        };
-        svg.addEventListener("animationend", handleAnimationEnd);
-      }
-    } catch (e) {
-      // fail silently if DOM isn't present
-    }
+    showFlashMessage(`${this.product.NameWithoutBrand} added to cart!`);
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
   }
-  //this is the flag that will trigger the animation on the cart icon when the page reloads
+
   renderProductDetails() {
     productDetailsTemplate(this.product);
   }
 }
+    
 
 function productDetailsTemplate(product) {
   document.querySelector(".product-brand").textContent =
@@ -71,4 +61,11 @@ function productDetailsTemplate(product) {
     product.DescriptionHtmlSimple;
 
   document.getElementById("addToCart").dataset.id = product.Id;
+}
+
+function showFlashMessage(message) {
+  const flash = document.createElement("div");
+  flash.className = "flash-message";
+  flash.textContent = message;
+  document.body.appendChild(flash);
 }
