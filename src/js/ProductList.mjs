@@ -15,18 +15,32 @@ function productCardTemplate(product) {
 }
 
 export default class ProductList {
-  constructor(category,dataSource,listElement) {
+  constructor(category, dataSource, listElement) {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.quickView = new QuickView(dataSource);
   }
-
+  
   async init() {
     const list = await this.dataSource.getData();
     const filteredList = list.filter((product) => allowedIds.includes(product.Id));
     this.renderList(filteredList);
   }
-    renderList(list) {
+  
+  renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+    
+    this.addQuickViewEvents();
+  }
+
+  addQuickViewEvents() {
+    const buttons = document.querySelectorAll(".quick-view-btn");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        this.quickView.show(button.dataset.id);
+      });
+    });
   }
 }

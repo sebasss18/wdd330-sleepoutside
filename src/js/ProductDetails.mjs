@@ -9,55 +9,67 @@ export default class ProductDetails {
   }
 
   async init() {
-    // use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
-    // the product details are needed before rendering the HTML
     this.renderProductDetails();
-    // once the HTML is rendered, add a listener to the Add to Cart button
-    // Notice the .bind(this). This callback will not work if the bind(this) is missing. Review the readings from this week on "this" to understand why.
+
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
   }
 
   addProductToCart() {
-    const cartItems = getLocalStorage("so-cart") || [];
+    let cartItems = getLocalStorage("so-cart");
+
+    if (!Array.isArray(cartItems)) {
+      cartItems = [];
+    }
+
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
+    // This is the flag that will trigger the animation on the cart icon when the page reloads
 
-    //add a flash message to the page to let the user know the product was added to the cart
-    showFlashMessage(`${this.product.NameWithoutBrand} was added to your cart!`);
+    setLocalStorage("so-cart-animate", true);
 
-    //redirect the user to the cart page after 1 second
-    setTimeout(() => {
-      window.location.href = "/cart/";
-    }, 2000);
-
+    try {
+      const cartEl = document.querySelector(".cart");
+      const svg = cartEl?.querySelector("svg");
+      if (cartEl && svg) {
+        cartEl.classList.add("cart--animate");
+        const handleAnimationEnd = () => {
+          cartEl.classList.remove("cart--animate");
+          svg.removeEventListener("animationend", handleAnimationEnd);
+        };
+        svg.addEventListener("animationend", handleAnimationEnd);
+      }
+    } catch (e) {
+      // fail silently if DOM isn't present
+    }
   }
-
+  //this is the flag that will trigger the animation on the cart icon when the page reloads
   renderProductDetails() {
     productDetailsTemplate(this.product);
   }
 }
 
 function productDetailsTemplate(product) {
-  document.querySelector("h2").textContent = product.Brand.Name;
-  document.querySelector("h3").textContent = product.NameWithoutBrand;
+  document.querySelector(".product-brand").textContent =
+    product.Brand.Name;
 
-  const productImage = document.getElementById("productImage");
+  document.querySelector(".product-name").textContent =
+    product.NameWithoutBrand;
+
+  const productImage = document.querySelector(".product-image");
   productImage.src = product.Image;
   productImage.alt = product.NameWithoutBrand;
 
-  document.getElementById("productPrice").textContent = product.FinalPrice;
-  document.getElementById("productColor").textContent = product.Colors[0].ColorName;
-  document.getElementById("productDesc").innerHTML = product.DescriptionHtmlSimple;
+  document.querySelector(".product-price").textContent =
+    `$${product.FinalPrice}`;
+
+  document.querySelector(".product-color").textContent =
+    product.Colors?.[0]?.ColorName || "N/A";
+
+  document.querySelector(".product-description").innerHTML =
+    product.DescriptionHtmlSimple;
 
   document.getElementById("addToCart").dataset.id = product.Id;
-}
-
-function showFlashMessage(message) {
-  const flash = document.createElement("div");
-  flash.className = "flash-message";
-  flash.textContent = message;
-  document.body.appendChild(flash);
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | Home</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <script src="js/main.js" type="module"></script>
   </head>
 
   <body>
@@ -60,13 +61,16 @@
           </p>
         </div>
       </div>
-
       <section class="products">
         <h2>Top Products</h2>
-        <ul class="product-list"> 
-      
-        </ul>
+        <ul class="product-list"></ul>
       </section>
+      <div id="quick-view-modal" class="modal hidden">
+        <div class="modal-content">
+          <button id="close-modal">&times;</button>
+          <div id="modal-body"></div>
+        </div>
+      </div>
     </main>
     <footer>
       &copy;2025 ⛺ SleepOutside ⛺ WDD 330 ⛺ BYU-Idaho for BYU-Pathway
