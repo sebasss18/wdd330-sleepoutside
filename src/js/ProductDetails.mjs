@@ -48,7 +48,8 @@ function productDetailsTemplate(product) {
     product.NameWithoutBrand;
 
   const productImage = document.querySelector(".product-image");
-  productImage.src = product.Image;
+  // Updated to access the Images object from the API response
+  productImage.src = product.Images.PrimaryLarge;
   productImage.alt = product.NameWithoutBrand;
 
   document.querySelector(".product-price").textContent =
