@@ -26,20 +26,53 @@ export function setClick(selector, callback) {
 
 // --- NEW FUNCTIONS BELOW ---
 
-// Retrieve a parameter from the URL 
+// Retrieve a parameter from the URL
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
 
-// Render a list of items using a template function 
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+// Render a list of items using a template function
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   if (clear) {
     parentElement.innerHTML = "";
   }
   const htmlStrings = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  //header
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const headerElement = document.querySelector("#main-header");
+
+  renderWithTemplate(headerTemplate, headerElement)
+
+  //footer
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const footerElement = document.querySelector("#main-footer");
+
+  renderWithTemplate(footerTemplate, footerElement);
 }
 
 export function updateCartCount() {
