@@ -1,4 +1,5 @@
-const baseURL = import.meta.env.VITE_SERVER_URL;
+// FIX: Hardcode the API URL so Render doesn't need a secret .env file
+const baseURL = "https://wdd330-backend.onrender.com/";
 
 function convertToJson(res) {
   if (res.ok) {
