@@ -367,3 +367,40 @@ footer {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+
+.category-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #414833;
+  padding: 15px;
+  border-radius: 18px;
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-link img {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 12px;
+  transition: transform 0.3s ease;
+}
+
+.category-link:hover {
+  color: #7F5539;
+  background-color: #FAF8F4;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+.category-link:hover img {
+  transform: scale(1.01) rotate(3deg);
+}
+
+.title-category {
+  padding-bottom: 25px;
+}

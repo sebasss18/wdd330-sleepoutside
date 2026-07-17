@@ -84,4 +84,4 @@ function initSearch() {
 
 // Initialize the search event listeners
 initSearch();
-loadHeaderFooter();
+loadHeaderFooter()
