@@ -1,7 +1,7 @@
 import { renderListWithTemplate } from "./utils.mjs";
 import QuickView from "./QuickView.mjs";
 
-const allowedIds = ["880RR", "985RF", "985PR", "344YJ"];
+//const allowedIds = ["880RR", "985RF", "985PR", "344YJ"];
 
 function productCardTemplate(product) {
   return `<li class="product-card">
@@ -24,9 +24,11 @@ export default class ProductList {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
-    const filteredList = list.filter((product) => allowedIds.includes(product.Id));
-    this.renderList(filteredList);
+    //const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
+    //const filteredList = list.filter((product) => allowedIds.includes(product.Id));
+    this.renderList(list);
+    document.querySelector(".title").textContent = this.category;
   }
 
   renderList(list) {

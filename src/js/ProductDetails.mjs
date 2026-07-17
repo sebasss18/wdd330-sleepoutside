@@ -17,11 +17,11 @@ export default class ProductDetails {
   }
 
   addProductToCart() {
-    let cartItems = getLocalStorage("so-cart");
+    const  cartItems = getLocalStorage("so-cart");
 
-    if (!Array.isArray(cartItems)) {
-      cartItems = [];
-    }
+    //if (!Array.isArray(cartItems)) {
+    //  cartItems = [];
+    //}
 
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
@@ -34,7 +34,7 @@ export default class ProductDetails {
     }, 2000);
   }
 
-  renderProductDetails() {
+    renderProductDetails() {
     productDetailsTemplate(this.product);
   }
 }
