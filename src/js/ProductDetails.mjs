@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -70,3 +70,5 @@ function showFlashMessage(message) {
   flash.textContent = message;
   document.body.appendChild(flash);
 }
+
+loadHeaderFooter();

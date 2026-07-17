@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   return `<li class="cart-card divider">
@@ -55,3 +55,5 @@ export default class ShoppingCart {
     this.renderCartContents();
   }
 }
+
+loadHeaderFooter();

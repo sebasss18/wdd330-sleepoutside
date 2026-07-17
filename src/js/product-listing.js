@@ -1,6 +1,6 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
-import { getParam } from "./utils.mjs";
+import { getParam, loadHeaderFooter } from "./utils.mjs";
 
 // 1. Get the category from the URL (e.g., index.html?category=tents)
 const category = getParam("category");
@@ -84,3 +84,4 @@ function initSearch() {
 
 // Initialize the search event listeners
 initSearch();
+loadHeaderFooter();

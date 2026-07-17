@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, loadHeaderFooter } from "./utils.mjs";
 import QuickView from "./QuickView.mjs";
 
 function productCardTemplate(product) {
@@ -43,3 +43,5 @@ export default class ProductList {
     });
   }
 }
+
+loadHeaderFooter()
