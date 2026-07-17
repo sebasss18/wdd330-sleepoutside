@@ -28,16 +28,18 @@
           </p>
         </div>
       </div>
+      
+      <!-- New Category Navigation -->
       <section class="products">
-        <h2>Top Products</h2>
-        <ul class="product-list"></ul>
+        <h2>Shop by Category</h2>
+        <ul class="category-list" style="display: flex; gap: 20px; justify-content: center; list-style: none; padding: 0;">
+          <li><a href="product_listing/index.html?category=tents">Tents</a></li>
+          <li><a href="product_listing/index.html?category=backpacks">Backpacks</a></li>
+          <li><a href="product_listing/index.html?category=sleeping-bags">Sleeping Bags</a></li>
+          <li><a href="product_listing/index.html?category=hammocks">Hammocks</a></li>
+        </ul>
       </section>
-      <div id="quick-view-modal" class="modal hidden">
-        <div class="modal-content">
-          <button id="close-modal">&times;</button>
-          <div id="modal-body"></div>
-        </div>
-      </div>
+      
     </main>
     <footer id="main-footer"></footer>
   </body>
