@@ -5,12 +5,20 @@ export default class QuickView {
     this.modalBody = document.querySelector("#modal-body");
     this.closeButton = document.querySelector("#close-modal");
 
-    this.closeButton.addEventListener("click", () => {
-      this.close();
-    });
+    // We only add the click event if the close button exists on the page
+    if (this.closeButton) {
+      this.closeButton.addEventListener("click", () => {
+        this.close();
+      });
+    }
   }
 
   async show(productId) {
+    // Stop the function if the modal HTML isn't on the page
+    if (!this.modal || !this.modalBody) {
+      return;
+    }
+
     const product = await this.dataSource.findProductById(productId);
 
     this.modalBody.innerHTML = `
@@ -24,6 +32,9 @@ export default class QuickView {
   }
 
   close() {
-    this.modal.classList.add("hidden");
+    // Only try to hide it if the modal exists
+    if (this.modal) {
+      this.modal.classList.add("hidden");
+    }
   }
 }
