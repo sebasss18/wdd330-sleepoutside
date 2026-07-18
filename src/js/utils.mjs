@@ -84,3 +84,11 @@ export function updateCartCount() {
     badge.style.display = count > 0 ? "flex" : "none";
   }
 }
+
+export function renderBreadcrumb(text) {
+  const breadcrumb = document.querySelector("#breadcrumb");
+
+  if (breadcrumb) {
+    breadcrumb.textContent = text;
+  }
+}

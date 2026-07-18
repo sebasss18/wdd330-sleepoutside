@@ -27,6 +27,8 @@ export default class ProductList {
     
     // Render the entire list returned by the API
     this.renderList(list);
+
+    return list;
   }
 
   renderList(list) {
