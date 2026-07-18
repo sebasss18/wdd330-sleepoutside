@@ -1,6 +1,6 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
-import { getParam, loadHeaderFooter } from "./utils.mjs";
+import { getParam, loadHeaderFooter, renderBreadcrumb } from "./utils.mjs";
 
 // 1. Get the category from the URL (e.g., index.html?category=tents)
 const category = getParam("category");
@@ -13,7 +13,7 @@ const listElement = document.querySelector(".product-list");
 const myList = new ProductList(category, dataSource, listElement);
 
 // 4. Initialize the list to fetch and display the products
-myList.init();
+// myList.init()
 
 // 5. Update the page title to show the current category
 const titleElement = document.querySelector(".title");
@@ -92,4 +92,11 @@ if (sortSelect) {
 }
 // Initialize the search event listeners
 initSearch();
-loadHeaderFooter()
+loadHeaderFooter().then(() => {
+  myList.init().then((list) => {
+    const formattedCategory =
+      category.charAt(0).toUpperCase() + category.slice(1);
+
+    renderBreadcrumb(`${formattedCategory} (${list.length} items)`);
+  });
+});
