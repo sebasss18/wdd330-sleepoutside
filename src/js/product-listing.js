@@ -82,17 +82,20 @@ function initSearch() {
   });
 }
 // --- 7. SORT FUNCTIONALITY ---
-const sortSelect = document.getElementById("sort-select");
 
-if (sortSelect) {
-  sortSelect.addEventListener("change", (e) => {
-    console.log("Opción seleccionada:", e.target.value); // <--- ESTO TE DIRÁ SI EL CLICK FUNCIONA
-    myList.sortList(e.target.value);
-  });
-}
 // Initialize the search event listeners
 initSearch();
 loadHeaderFooter().then(() => {
+
+  const sortSelect = document.getElementById("sort-select");
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      console.log("Opción seleccionada:", e.target.value);
+      myList.sortList(e.target.value);
+    });
+  }
+
   myList.init().then((list) => {
     const formattedCategory =
       category.charAt(0).toUpperCase() + category.slice(1);
