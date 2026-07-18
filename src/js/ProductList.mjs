@@ -27,9 +27,9 @@ export default class ProductList {
     this.list = await this.dataSource.getData(this.category);
 
     // Render the entire list returned by the API
-    this.renderList(list);
+    this.renderList(this.list);
 
-    return list;
+    return this.list;
   }
 
   renderList(list) {
