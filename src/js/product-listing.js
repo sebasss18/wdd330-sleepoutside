@@ -35,7 +35,7 @@ function initSearch() {
   function performSearch() {
     const query = searchInput.value.toLowerCase();
     // Select all rendered product cards (the <li> elements inside the <ul>)
-    const productCards = productList.children; 
+    const productCards = productList.children;
     let hasVisibleProducts = false;
 
     Array.from(productCards).forEach(card => {
@@ -73,7 +73,7 @@ function initSearch() {
 
   // Trigger search on button click
   searchButton.addEventListener("click", performSearch);
-  
+
   // Trigger search when pressing the "Enter" key
   searchInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
@@ -81,7 +81,15 @@ function initSearch() {
     }
   });
 }
+// --- 7. SORT FUNCTIONALITY ---
+const sortSelect = document.getElementById("sort-select");
 
+if (sortSelect) {
+  sortSelect.addEventListener("change", (e) => {
+    console.log("Opción seleccionada:", e.target.value); // <--- ESTO TE DIRÁ SI EL CLICK FUNCIONA
+    myList.sortList(e.target.value);
+  });
+}
 // Initialize the search event listeners
 initSearch();
 loadHeaderFooter()

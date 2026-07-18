@@ -19,14 +19,29 @@ export default class ProductList {
     this.dataSource = dataSource;
     this.listElement = listElement;
     this.quickView = new QuickView(dataSource);
+    this.list = [];
   }
 
   async init() {
     // Fetch the list of products from the API based on the category
-    const list = await this.dataSource.getData(this.category);
-    
+    this.list = await this.dataSource.getData(this.category);
+
     // Render the entire list returned by the API
-    this.renderList(list);
+    this.renderList(this.list);
+  }
+ sortList(criteria) {
+    const sortedList = [...this.list];
+    console.log("Ordenando por:", criteria); // <--- PARA VER SI LLEGA EL CRITERIO
+
+    if (criteria === "price") {
+      sortedList.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    } else if (criteria === "name") {
+      sortedList.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    }
+
+    console.log("Lista ordenada:", sortedList); // <--- PARA VER SI CAMBIÓ EL ORDEN
+    this.listElement.innerHTML = "";
+    this.renderList(sortedList);
   }
 
   renderList(list) {
