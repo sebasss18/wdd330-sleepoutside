@@ -33,8 +33,17 @@ export default class ProductList {
   }
 
   renderList(list) {
+    this.listElement.innerHTML = "";
     renderListWithTemplate(productCardTemplate, this.listElement, list);
     this.addQuickViewEvents();
+  }
+  sortList(criteria) {
+    if (criteria === "name") {
+      this.list.sort((a, b) => a.NameWithoutBrand.localeCompare(b.NameWithoutBrand));
+    } else if (criteria === "price") {
+      this.list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+    }
+    this.renderList(this.list);
   }
 
   addQuickViewEvents() {
