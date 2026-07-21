@@ -1,3 +1,4 @@
+
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -74,4 +75,22 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement, null, updateCartCount);
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+export function formDataToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+
+export function showFlashMessage(message, type = "success") {
+  const flash = document.createElement("div");
+  flash.className = `flash-message flash-message--${type}`;
+  flash.textContent = message;
+  document.body.appendChild(flash);
 }

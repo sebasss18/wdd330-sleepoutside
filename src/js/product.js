@@ -2,7 +2,7 @@ import { getParam,updateCartCount,loadHeaderFooter } from "./utils.mjs";
 
 loadHeaderFooter();
 
-import ProductData from "./ProductData.mjs";
+import ProductData from "./ExternalServices.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 
 const productId = getParam("product");

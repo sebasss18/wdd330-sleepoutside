@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage,showFlashMessage} from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -64,12 +64,7 @@ function productDetailsTemplate(product) {
   renderDiscount(product);
 }
 
-function showFlashMessage(message) {
-  const flash = document.createElement("div");
-  flash.className = "flash-message";
-  flash.textContent = message;
-  document.body.appendChild(flash);
-}
+
 
 function renderDiscount(product) {
   const discountEl = document.querySelector(".product-discount");
