@@ -1,4 +1,9 @@
-import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  getWishlist,
+  updateWishlistVisibility,
+} from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -14,6 +19,10 @@ export default class ProductDetails {
     document
       .getElementById("addToCart")
       .addEventListener("click", this.addProductToCart.bind(this));
+
+    const wishlistBtn = document.getElementById("wishlistBtn");
+    this.updateHeartState(wishlistBtn);
+    wishlistBtn.addEventListener("click", () => this.toggleWishlist(wishlistBtn));
   }
 
   addProductToCart() {
@@ -26,29 +35,55 @@ export default class ProductDetails {
     cartItems.push(this.product);
     setLocalStorage("so-cart", cartItems);
 
-    
-    // This is the flag that will trigger the animation on the cart icon when the page reloads
     showFlashMessage(`${this.product.NameWithoutBrand} added to cart!`);
     setTimeout(() => {
       window.location.href = "/";
     }, 2000);
   }
 
+  isInWishlist() {
+    return getWishlist().some((item) => item.Id === this.product.Id);
+  }
+
+  updateHeartState(button) {
+    if (this.isInWishlist()) {
+      button.classList.add("active");
+      button.setAttribute("aria-label", "Remove from wishlist");
+    } else {
+      button.classList.remove("active");
+      button.setAttribute("aria-label", "Add to wishlist");
+    }
+  }
+
+  toggleWishlist(button) {
+    let wishlist = getWishlist();
+
+    if (this.isInWishlist()) {
+      wishlist = wishlist.filter((item) => item.Id !== this.product.Id);
+      setLocalStorage("so-wishlist", wishlist);
+      showFlashMessage(`${this.product.NameWithoutBrand} removed from wishlist`);
+    } else {
+      wishlist.push(this.product);
+      setLocalStorage("so-wishlist", wishlist);
+      showFlashMessage(`${this.product.NameWithoutBrand} added to wishlist`);
+    }
+
+    this.updateHeartState(button);
+    updateWishlistVisibility();
+  }
+
   renderProductDetails() {
     productDetailsTemplate(this.product);
   }
 }
-    
 
 function productDetailsTemplate(product) {
-  document.querySelector(".product-brand").textContent =
-    product.Brand.Name;
+  document.querySelector(".product-brand").textContent = product.Brand.Name;
 
   document.querySelector(".product-name").textContent =
     product.NameWithoutBrand;
 
   const productImage = document.querySelector(".product-image");
-  // Updated to access the Images object from the API response
   productImage.src = product.Images.PrimaryLarge;
   productImage.alt = product.NameWithoutBrand;
 
@@ -69,6 +104,6 @@ function showFlashMessage(message) {
   flash.className = "flash-message";
   flash.textContent = message;
   document.body.appendChild(flash);
-}
 
-loadHeaderFooter();
+  setTimeout(() => flash.remove(), 2000);
+}
