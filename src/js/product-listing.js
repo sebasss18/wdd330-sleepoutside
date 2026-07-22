@@ -1,4 +1,4 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { getParam, loadHeaderFooter, renderBreadcrumb } from "./utils.mjs";
 
@@ -6,7 +6,7 @@ import { getParam, loadHeaderFooter, renderBreadcrumb } from "./utils.mjs";
 const category = getParam("category");
 
 // 2. Create the data source and the list renderer
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
 
 // 3. Create the instance of ProductList and pass the dynamic category
