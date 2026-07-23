@@ -66,13 +66,16 @@ export async function loadHeaderFooter() {
   const headerTemplate = await loadTemplate("../partials/header.html");
   const headerElement = document.querySelector("#main-header");
 
-  renderWithTemplate(headerTemplate, headerElement)
+  renderWithTemplate(headerTemplate, headerElement);
 
   //footer
   const footerTemplate = await loadTemplate("../partials/footer.html");
   const footerElement = document.querySelector("#main-footer");
 
   renderWithTemplate(footerTemplate, footerElement);
+
+  updateCartCount();
+  updateWishlistVisibility();
 }
 
 export function updateCartCount() {
@@ -82,6 +85,22 @@ export function updateCartCount() {
   if (badge) {
     badge.textContent = count;
     badge.style.display = count > 0 ? "flex" : "none";
+  }
+}
+
+export function getWishlist() {
+  const items = getLocalStorage("so-wishlist");
+  return Array.isArray(items) ? items : [];
+}
+
+export function updateWishlistVisibility() {
+  const link = document.getElementById("wishlist-link");
+  if (!link) return;
+
+  if (getWishlist().length > 0) {
+    link.classList.remove("hide");
+  } else {
+    link.classList.add("hide");
   }
 }
 
