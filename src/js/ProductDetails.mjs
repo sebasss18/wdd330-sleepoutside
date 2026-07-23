@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage,showFlashMessage} from "./utils.mjs";
+import { getLocalStorage, setLocalStorage,showFlashMessage, alertMessage} from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -28,7 +28,8 @@ export default class ProductDetails {
 
     
     // This is the flag that will trigger the animation on the cart icon when the page reloads
-    showFlashMessage(`${this.product.NameWithoutBrand} added to cart!`);
+    //showFlashMessage(`${this.product.NameWithoutBrand} added to cart!`);
+    alertMessage(`${this.product.NameWithoutBrand} added to cart!`);
     setTimeout(() => {
       window.location.href = "/";
     }, 2000);

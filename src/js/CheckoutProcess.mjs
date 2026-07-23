@@ -70,7 +70,11 @@ export default class CheckoutProcess {
         json.shipping = this.shipping;
         json.items = this.packageItems(this.list);
 
-        const response = await this.dataSource.checkout(json);
-        return response;
+        try {
+            const response = await this.dataSource.checkout(json);
+            return response;
+        } catch (err) {
+            throw err;
+        }
     }
-}
+}   
