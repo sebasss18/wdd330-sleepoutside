@@ -56,5 +56,9 @@ export default class ShoppingCart {
   }
 }
 
-await loadHeaderFooter();
-updateCartCount();
+async function initShoppingCartPage() {
+  await loadHeaderFooter();
+  updateCartCount();
+}
+
+initShoppingCartPage();

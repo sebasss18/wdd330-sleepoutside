@@ -82,8 +82,10 @@ function initSearch() {
   });
 }
 // --- 7. SORT FUNCTIONALITY ---
-initSearch();
-await loadHeaderFooter().then(() => {
+async function initPage() {
+  await loadHeaderFooter();
+
+  initSearch();
 
   const sortSelect = document.getElementById("sort-select");
 
@@ -94,12 +96,14 @@ await loadHeaderFooter().then(() => {
     });
   }
 
-  myList.init().then((list) => {
-    const formattedCategory =
-      category.charAt(0).toUpperCase() + category.slice(1);
+  const list = await myList.init();
 
-    renderBreadcrumb(`${formattedCategory} (${list.length} items)`);
-  });
-});
+  const formattedCategory =
+    category.charAt(0).toUpperCase() + category.slice(1);
 
-updateCartCount();
+  renderBreadcrumb(`${formattedCategory} (${list.length} items)`);
+
+  updateCartCount();
+}
+
+initPage();
