@@ -1,10 +1,10 @@
-import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import { getLocalStorage, loadHeaderFooter,updateCartCount } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   return `<li class="cart-card divider">
     <a href="#" class="cart-card__image">
       <img
-        src="${item.Image}"
+        src="${item.Images.PrimarySmall}"
         alt="${item.Name}"
       />
     </a>
@@ -56,4 +56,5 @@ export default class ShoppingCart {
   }
 }
 
-loadHeaderFooter();
+await loadHeaderFooter();
+updateCartCount();

@@ -1,3 +1,5 @@
+
+
 export default class QuickView {
   constructor(dataSource) {
     this.dataSource = dataSource;
