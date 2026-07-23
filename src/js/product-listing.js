@@ -1,6 +1,6 @@
 import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
-import { getParam, loadHeaderFooter, renderBreadcrumb } from "./utils.mjs";
+import { getParam, loadHeaderFooter, renderBreadcrumb, updateCartCount } from "./utils.mjs";
 
 // 1. Get the category from the URL (e.g., index.html?category=tents)
 const category = getParam("category");
@@ -83,7 +83,7 @@ function initSearch() {
 }
 // --- 7. SORT FUNCTIONALITY ---
 initSearch();
-loadHeaderFooter().then(() => {
+await loadHeaderFooter().then(() => {
 
   const sortSelect = document.getElementById("sort-select");
 
@@ -101,3 +101,5 @@ loadHeaderFooter().then(() => {
     renderBreadcrumb(`${formattedCategory} (${list.length} items)`);
   });
 });
+
+updateCartCount();
